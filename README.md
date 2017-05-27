@@ -1,2 +1,2 @@
 # Binary-Digital-Discrete-Compare
-Project fo compare signal 
+Project fo compare time-series signal 

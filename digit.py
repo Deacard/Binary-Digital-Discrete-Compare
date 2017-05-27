@@ -5,6 +5,7 @@ author: decard
 22.05.17
 """
 
+
 def rolltime(self_t, self_z):
     """
     self_t - список времени
@@ -23,6 +24,7 @@ def rolltime(self_t, self_z):
         b.append(z)
     return b
 
+
 def searchpoint(self, time):
     """
     Ищет точки екстренума
@@ -34,18 +36,19 @@ def searchpoint(self, time):
     b1 = [0, 1]
     b2 = [1, 0]
     for i in range(len(self)):
-        chunk = self[i:i+2]
+        chunk = self[i:i + 2]
         if b1 == chunk:
-            a = time[i:i+2]
-            b = self[i:i+2]
+            a = time[i:i + 2]
+            b = self[i:i + 2]
             c1 = a + b
             c.append(c1)
         if b2 == chunk:
-            a = time[i:i+2]
-            b = self[i:i+2]
+            a = time[i:i + 2]
+            b = self[i:i + 2]
             c2 = a + b
             c.append(c2)
     return c
+
 
 def compare(self, data, BORDER=1):
     """

@@ -22,8 +22,8 @@ a8 = [1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
 a9 = [0, 1, 0, 1, 0, 1, 0, 1, 0, 1]
 a0 = [0, 0, 0, 1, 1, 1, 1, 0, 0, 0]
 
-t1 = digit.rolltime(t1, aa)
-t2 = digit.rolltime(t2, aa)
+t1 = digit.rolltime(aa, t1)
+t2 = digit.rolltime(aa, t2)
 
-digit.compare(digit.searchpoint(a9, t1),
+digit.compare(digit.searchpoint(aa, t1),
               digit.searchpoint(a0, t2), BORDER=0.001)

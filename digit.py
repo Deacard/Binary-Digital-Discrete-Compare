@@ -50,37 +50,34 @@ def searchpoint(PointList, TimeList):
 def compare(TrueList, DataList, BORDER=1):
     """
     сравнение двух сигалов, значения беруться из дампов
+    [[t0, t1, 0, 1], [t1, t0, 1, 0], ...]
     BORDER - граница по времени сработки, сравниваеться по модулю
     """
     print('Сравниваю...')
     for x, y in zip(TrueList, DataList):
         if x[3] and y[3] == 1:
             delta = x[1] - y[1]
-            if abs(delta) < BORDER:
-                print(delta, 'good')
+            if abs(delta) <= BORDER:
+                print(_out(delta, BORDER), '+ в пределе')
             else:
-                print(delta, 'bed')
+                print(_out(delta, BORDER), '- выпал')
         elif x[2] and y[2] == 1:
             delta = x[0] - y[0]
-            if abs(delta) < BORDER:
-                print(delta, 'good')
+            if abs(delta) <= BORDER:
+                print(_out(delta, BORDER), '+ в пределе')
             else:
-                print(delta, 'bed')
+                print(_out(delta, BORDER), '- выпал')
         else:
             print('Не та последовательность экстренумов')
 
 
-def _out(a, delta):
+def _out(delta, BORDER):
     """
-    Более полный вывод
+    Вывод
     """
-    if abs(a) <= delta:
-        print(a, '+ в пределе')
-    else:
-        print(a, '- выпал')
-    if a < 0:
-        print('сработал позже')
-    elif a > 0:
-        print('сработал раньше')
-    elif a == 0:
-        print('попал')
+    if delta < 0:
+        return 'Сработал позже предела на ' + str(abs(delta) - BORDER)
+    elif delta > 0:
+        return 'Сработал раньше предела на ' + str(abs(delta) - BORDER)
+    elif delta == 0:
+        return 'Четко попал ' + str(delta)

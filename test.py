@@ -25,5 +25,5 @@ a0 = [0, 0, 0, 1, 1, 1, 1, 0, 0, 0]
 t1 = digit.rolltime(aa, t1)
 t2 = digit.rolltime(aa, t2)
 
-digit.compare(digit.searchpoint(aa, t1),
-              digit.searchpoint(a0, t2), BORDER=0.001)
+digit.compare(digit.searchpoint(a1, t1),
+              digit.searchpoint(a2, t2), BORDER=0.001)

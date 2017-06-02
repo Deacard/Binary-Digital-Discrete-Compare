@@ -52,19 +52,20 @@ def compare(TrueList, DataList, BORDER=1):
     сравнение двух сигалов, значения беруться из дампов
     [[t0, t1, 0, 1], [t1, t0, 1, 0], ...]
     BORDER - граница по времени сработки, сравниваеться по модулю
+    BORDER выбираеться как граница времени сработки деленная на 2
     """
     print('Сравниваю...')
     for x, y in zip(TrueList, DataList):
         if x[3] and y[3] == 1:
             delta = x[1] - y[1]
             if abs(delta) <= BORDER:
-                print(_out(delta, BORDER), '+ в пределе')
+                print('+ в пределе')
             else:
                 print(_out(delta, BORDER), '- выпал')
         elif x[2] and y[2] == 1:
             delta = x[0] - y[0]
             if abs(delta) <= BORDER:
-                print(_out(delta, BORDER), '+ в пределе')
+                print('+ в пределе')
             else:
                 print(_out(delta, BORDER), '- выпал')
         else:
@@ -79,5 +80,3 @@ def _out(delta, BORDER):
         return 'Сработал позже предела на ' + str(abs(delta) - BORDER)
     elif delta > 0:
         return 'Сработал раньше предела на ' + str(abs(delta) - BORDER)
-    elif delta == 0:
-        return 'Четко попал ' + str(delta)

@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
+
 """
 modul digit
 author: decard
 22.05.17
 """
+
+import decimal
 
 
 def rolltime(UpPointList, TimeList):
@@ -12,13 +15,15 @@ def rolltime(UpPointList, TimeList):
     UpPointList - список относительно которого будем сдвигать время,
     сдвигаем от первого вхождения '1'
     """
+    global item
+    decimal.getcontext().prec = 15
     if UpPointList[0] == 0:
         item = UpPointList.index(1)
     elif UpPointList[0] == 1:
-        return(TimeList)
+        return TimeList
     NewTime = []
     for i in TimeList:
-        PointTime = i - TimeList[item]
+        PointTime = decimal.Decimal(i) - decimal.Decimal(TimeList[item])
         NewTime.append(PointTime)
     return NewTime
 
@@ -61,22 +66,24 @@ def compare(TrueList, DataList, BORDER=1):
             if abs(delta) <= BORDER:
                 print('+ в пределе')
             else:
-                print(_out(delta, BORDER), '- выпал')
+                print(__out(delta, BORDER), '- выпал')
         elif x[2] and y[2] == 1:
             delta = x[0] - y[0]
             if abs(delta) <= BORDER:
                 print('+ в пределе')
             else:
-                print(_out(delta, BORDER), '- выпал')
+                print(__out(delta, BORDER), '- выпал')
         else:
             print('Не та последовательность экстренумов')
 
 
-def _out(delta, BORDER):
+def __out(x, y):
     """
     Вывод
     """
-    if delta < 0:
-        return 'Сработал позже предела на ' + str(abs(delta) - BORDER)
-    elif delta > 0:
-        return 'Сработал раньше предела на ' + str(abs(delta) - BORDER)
+    if x < 0:
+        a = str(abs(decimal.Decimal(x)) - decimal.Decimal(y))
+        return 'Сработал позже предела на ' + a
+    elif x > 0:
+        a = str(abs(decimal.Decimal(x)) - decimal.Decimal(y))
+        return 'Сработал раньше предела на ' + a

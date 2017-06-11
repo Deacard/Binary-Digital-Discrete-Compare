@@ -49,6 +49,10 @@ def searchpoint(PointList, TimeList):
             point = PointList[i:i + 2]
             res = time + point
             dump.append(res)
+    if (dump == []) and (1 in PointList):
+        dump = [[TimeList[0], TimeList[-1], 1, 1]]
+    else:
+        dump = [[TimeList[0], TimeList[-1], 0, 0]]
     return dump
 
 
@@ -60,19 +64,29 @@ def compare(TrueList, DataList, BORDER=1):
     BORDER выбираеться как граница времени сработки деленная на 2
     """
     print('Сравниваю...')
+    if len(TrueList) != len(DataList):
+        print('Кол-во экстренумов не совпадает, результат может быть неверный...')
     for x, y in zip(TrueList, DataList):
-        if x[3] and y[3] == 1:
+        if (x[2] == 0 and x[3] == 1) and (y[2] == 0 and y[3] == 1):
             delta = x[1] - y[1]
             if abs(delta) <= BORDER:
                 print('+ в пределе')
             else:
                 print(__out(delta, BORDER), '- выпал')
-        elif x[2] and y[2] == 1:
+        elif (x[2] == 1 and x[3] == 0) and (y[2] == 1 and y[3] == 0):
             delta = x[0] - y[0]
             if abs(delta) <= BORDER:
                 print('+ в пределе')
             else:
                 print(__out(delta, BORDER), '- выпал')
+        elif (len(DataList) == 1) and (x[2] == 1 and x[3] == 1) and (y[2] == 1 and y[3] == 1):
+            print('Оба в еденице +')
+        elif (len(DataList) == 1) and (x[2] == 0 and x[3] == 0) and (y[2] == 0 and y[3] == 0):
+            print('Оба в нуле +')
+        elif y[2] == 1 and y[3] == 1:
+            print('FAIL Постоянно в еденице -')
+        elif y[2] == 0 and y[3] == 0:
+            print('FAIL Постоянно в нуле -')
         else:
             print('Не та последовательность экстренумов')
 

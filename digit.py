@@ -11,19 +11,17 @@ import decimal
 
 def rolltime(UpPointList, TimeList):
     """
-    TimeList - список временных отметок]
-    UpPointList - список относительно которого будем сдвигать время,
-    сдвигаем от первого вхождения '1'
+    :type UpPointList: список относительно которого будем сдвигать время, сдвигаем от первого вхождения '1'
+    :type TimeList: список временных отметок]
     """
-    global item
     decimal.getcontext().prec = 15
     if UpPointList[0] == 0:
-        item = UpPointList.index(1)
+        idnex = UpPointList.index(1)
     elif UpPointList[0] == 1:
         return TimeList
     NewTime = []
     for i in TimeList:
-        PointTime = decimal.Decimal(i) - decimal.Decimal(TimeList[item])
+        PointTime = decimal.Decimal(i) - decimal.Decimal(TimeList[idnex])
         NewTime.append(PointTime)
     return NewTime
 
@@ -70,15 +68,15 @@ def compare(TrueList, DataList, BORDER=1):
         if (x[2] == 0 and x[3] == 1) and (y[2] == 0 and y[3] == 1):
             delta = x[1] - y[1]
             if abs(delta) <= BORDER:
-                print('+ в пределе')
+                print('в пределе +')
             else:
-                print(__out(delta, BORDER), '- выпал')
+                print(__out(delta, BORDER), 'выпал -')
         elif (x[2] == 1 and x[3] == 0) and (y[2] == 1 and y[3] == 0):
             delta = x[0] - y[0]
             if abs(delta) <= BORDER:
-                print('+ в пределе')
+                print('в пределе +')
             else:
-                print(__out(delta, BORDER), '- выпал')
+                print(__out(delta, BORDER), 'выпал -')
         elif (len(DataList) == 1) and (x[2] == 1 and x[3] == 1) and (y[2] == 1 and y[3] == 1):
             print('Оба в еденице +')
         elif (len(DataList) == 1) and (x[2] == 0 and x[3] == 0) and (y[2] == 0 and y[3] == 0):

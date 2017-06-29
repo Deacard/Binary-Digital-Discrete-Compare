@@ -47,9 +47,9 @@ def searchpoint(PointList, TimeList):
             point = PointList[i:i + 2]
             res = time + point
             dump.append(res)
-    if (dump == []) and (1 in PointList):
+    if (len(dump) == 0) and (1 in PointList):
         dump = [[TimeList[0], TimeList[-1], 1, 1]]
-    else:
+    if (len(dump) == 0) and (0 in PointList):
         dump = [[TimeList[0], TimeList[-1], 0, 0]]
     return dump
 

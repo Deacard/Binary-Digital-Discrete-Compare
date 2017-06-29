@@ -26,7 +26,7 @@ a0 = [0, 0, 1, 1, 1, 1, 0, 0, 0, 0]
 time_1 = digit.rolltime(gpio_0, time_1)
 time_2 = digit.rolltime(gpio_0, time_2)
 
-dump_a = digit.searchpoint(a7, time_1)
-dump_b = digit.searchpoint(a7, time_2)
+dump_a = digit.searchpoint(a1, time_1)
+dump_b = digit.searchpoint(a9, time_2)
 
 digit.compare(dump_a, dump_b, BORDER=0.001)
